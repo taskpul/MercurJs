@@ -19,7 +19,7 @@ export default async function RootLayout({
   const user = await retrieveCustomer()
   const regionCheck = await checkRegion(locale)
   const tenantData = tenant ? await retrieveTenant(tenant) : null
-  const logo = tenantData?.settings?.logo
+  const logo = tenantData?.logo
   const storeName = tenantData?.settings?.store_name
 
   if (!regionCheck) {

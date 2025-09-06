@@ -3,21 +3,22 @@
 import { sdk } from "../config"
 import { cache } from "react"
 
-export type TenantSettings = {
+export type Tenant = {
+  domain?: string
+  primary_color?: string
+  secondary_color?: string
+  logo?: string
   settings?: {
-    primary_color?: string
-    secondary_color?: string
-    logo?: string
     store_name?: string
     store_description?: string
   }
 }
 
-export const retrieveTenant = cache(async (slug: string): Promise<TenantSettings | null> => {
+export const retrieveTenant = cache(async (slug: string): Promise<Tenant | null> => {
   if (!slug) return null
 
   return sdk.client
-    .fetch<{ tenant: TenantSettings }>(`/store/tenant/${slug}`, {
+    .fetch<{ tenant: Tenant }>(`/store/tenant/${slug}`, {
       method: "GET",
       next: { revalidate: 60, tags: [`tenant-${slug}`] },
       cache: "force-cache",

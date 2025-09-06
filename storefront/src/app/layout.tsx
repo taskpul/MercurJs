@@ -33,8 +33,8 @@ export async function generateMetadata({
 
   const base = process.env.NEXT_PUBLIC_BASE_URL || "http://localhost:3000"
 
-  const icons = settings?.settings?.logo
-    ? [{ url: settings.settings.logo }]
+  const icons = settings?.logo
+    ? [{ url: settings.logo }]
     : undefined
 
   return {
@@ -66,8 +66,8 @@ export default async function RootLayout({
   const ALGOLIA_APP = process.env.NEXT_PUBLIC_ALGOLIA_ID
   const htmlLang = locale || "en"
 
-  const primary = tenantData?.settings?.primary_color
-  const secondary = tenantData?.settings?.secondary_color
+  const primary = tenantData?.primary_color
+  const secondary = tenantData?.secondary_color
 
   const style = primary || secondary
     ? `:root {${

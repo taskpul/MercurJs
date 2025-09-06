@@ -35,8 +35,8 @@ export const AppearanceSettings = () => {
   const form = useForm<z.infer<typeof AppearanceSchema>>({
     resolver: zodResolver(AppearanceSchema),
     defaultValues: {
-      primary_color: tenant?.settings?.primary_color || '#000000',
-      secondary_color: tenant?.settings?.secondary_color || '#000000',
+      primary_color: tenant?.primary_color || '#000000',
+      secondary_color: tenant?.secondary_color || '#000000',
       media: []
     }
   })
@@ -60,7 +60,7 @@ export const AppearanceSettings = () => {
     await mutateAsync({
       primary_color: values.primary_color,
       secondary_color: values.secondary_color,
-      logo: uploaded[0]?.url || tenant?.settings?.logo
+      logo: uploaded[0]?.url || tenant?.logo
     }, {
       onSuccess: () => toast.success(t('actions.save')),
       onError: (err) => toast.error(err.message)
@@ -74,7 +74,7 @@ export const AppearanceSettings = () => {
           <Form.Item>
             <Form.Label optional>Logo</Form.Label>
             <Form.Control>
-              <FileUpload uploadedImage={fields[0]?.url || tenant?.settings?.logo || ''} multiple={false} label={t('products.media.uploadImagesLabel')} hint={t('products.media.uploadImagesHint')} hasError={!!form.formState.errors.media} formats={SUPPORTED_FORMATS} onUploaded={onUploaded} />
+              <FileUpload uploadedImage={fields[0]?.url || tenant?.logo || ''} multiple={false} label={t('products.media.uploadImagesLabel')} hint={t('products.media.uploadImagesHint')} hasError={!!form.formState.errors.media} formats={SUPPORTED_FORMATS} onUploaded={onUploaded} />
             </Form.Control>
             <Form.ErrorMessage />
           </Form.Item>

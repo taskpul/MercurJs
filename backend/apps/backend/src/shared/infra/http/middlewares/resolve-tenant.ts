@@ -25,7 +25,11 @@ export async function resolveTenant(
 
   try {
     const tenantService = req.scope.resolve<TenantModuleService>(TENANT_MODULE)
-    const [tenant] = await tenantService.listTenants({ slug })
+    let [tenant] = await tenantService.listTenants({ slug })
+
+    if (!tenant) {
+      ;[tenant] = await tenantService.listTenants({ domain: hostname })
+    }
 
     if (tenant) {
       ;(req as any).tenant = tenant
