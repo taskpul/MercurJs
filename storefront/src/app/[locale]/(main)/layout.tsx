@@ -1,4 +1,5 @@
 import { Footer, Header } from "@/components/organisms"
+import { FAQSection } from "@/components/sections"
 import { retrieveCustomer } from "@/lib/data/customer"
 import { checkRegion } from "@/lib/helpers/check-region"
 import { Session } from "@talkjs/react"
@@ -26,6 +27,7 @@ export default async function RootLayout({
       <>
         <Header />
         {children}
+        <FAQSection />
         <Footer />
       </>
     )
@@ -35,6 +37,7 @@ export default async function RootLayout({
       <Session appId={APP_ID} userId={user.id}>
         <Header />
         {children}
+        <FAQSection />
         <Footer />
       </Session>
     </>
