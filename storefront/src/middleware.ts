@@ -101,30 +101,34 @@ export async function middleware(request: NextRequest) {
     return NextResponse.next()
   }
 
+  const host = request.headers.get("host") || ""
+  const hostname = host.split(":")[0]
+  const [subdomain] = hostname.split(".")
+  const isSubdomain =
+    subdomain && !["www", "localhost"].includes(subdomain)
+
+  const url = request.nextUrl.clone()
+  if (isSubdomain) {
+    url.pathname = `/${subdomain}${url.pathname}`
+  }
+
   const cacheIdCookie = request.cookies.get("_medusa_cache_id")
-  const urlSegment = request.nextUrl.pathname.split("/")[1]
+  const segments = url.pathname.split("/")
+  const localeIndex = isSubdomain ? 2 : 1
+  const urlSegment = segments[localeIndex]
   const looksLikeLocale = /^[a-z]{2}$/i.test(urlSegment || "")
 
   // Fast path: URL already has a locale segment and cache cookie exists
   if (looksLikeLocale && cacheIdCookie) {
-    return NextResponse.next()
+    return isSubdomain ? NextResponse.rewrite(url) : NextResponse.next()
   }
 
-  let response = NextResponse.next()
-
-  // Ensure cache id cookie exists (set without redirect)
   const cacheId = cacheIdCookie?.value || crypto.randomUUID()
-  if (!cacheIdCookie) {
-    response.cookies.set("_medusa_cache_id", cacheId, {
-      maxAge: 60 * 60 * 24,
-    })
-  }
-
   const regionMap = await getRegionMap(cacheId)
   const countryCode = regionMap && (await getCountryCode(request, regionMap))
 
   const urlHasCountryCode =
-    countryCode && request.nextUrl.pathname.split("/")[1].includes(countryCode)
+    countryCode && segments[localeIndex]?.includes(countryCode)
 
   // If no country code in URL but we can resolve one, redirect to locale-prefixed path
   if (!urlHasCountryCode && countryCode) {
@@ -132,7 +136,23 @@ export async function middleware(request: NextRequest) {
       request.nextUrl.pathname === "/" ? "" : request.nextUrl.pathname
     const queryString = request.nextUrl.search ? request.nextUrl.search : ""
     const redirectUrl = `${request.nextUrl.origin}/${countryCode}${redirectPath}${queryString}`
-    return NextResponse.redirect(redirectUrl, 307)
+    const redirect = NextResponse.redirect(redirectUrl, 307)
+    if (!cacheIdCookie) {
+      redirect.cookies.set("_medusa_cache_id", cacheId, {
+        maxAge: 60 * 60 * 24,
+      })
+    }
+    return redirect
+  }
+
+  const response = isSubdomain
+    ? NextResponse.rewrite(url)
+    : NextResponse.next()
+
+  if (!cacheIdCookie) {
+    response.cookies.set("_medusa_cache_id", cacheId, {
+      maxAge: 60 * 60 * 24,
+    })
   }
 
   return response
