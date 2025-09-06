@@ -19,13 +19,6 @@ export const BannerSection = () => {
           />
         </div>
         <div className="flex flex-col justify-center h-full">
-          <Image
-            src="/Logo.png"
-            alt="Notup logo"
-            width={120}
-            height={40}
-            className="mb-4 w-auto h-auto"
-          />
           <h2 className="display-sm mb-4">
             Custom Marketplace built in 9 Weeks
           </h2>
