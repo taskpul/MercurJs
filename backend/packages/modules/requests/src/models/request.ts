@@ -2,6 +2,7 @@ import { model } from '@medusajs/framework/utils'
 
 export const Request = model.define('request', {
   id: model.id({ prefix: 'req' }).primaryKey(),
+  tenant_id: model.text().index(),
   type: model.text(),
   data: model.json(),
   submitter_id: model.text(),
