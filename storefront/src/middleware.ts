@@ -101,30 +101,34 @@ export async function middleware(request: NextRequest) {
     return NextResponse.next()
   }
 
+  const host = request.headers.get("host") || ""
+  const hostname = host.split(":")[0]
+  const [subdomain] = hostname.split(".")
+  const isSubdomain =
+    subdomain && !["www", "localhost"].includes(subdomain)
+
   const cacheIdCookie = request.cookies.get("_medusa_cache_id")
-  const urlSegment = request.nextUrl.pathname.split("/")[1]
+  const segments = request.nextUrl.pathname.split("/")
+  const localeIndex = 1
+  const urlSegment = segments[localeIndex]
   const looksLikeLocale = /^[a-z]{2}$/i.test(urlSegment || "")
+
+  const requestHeaders = new Headers(request.headers)
+  if (isSubdomain) {
+    requestHeaders.set("x-tenant", subdomain)
+  }
 
   // Fast path: URL already has a locale segment and cache cookie exists
   if (looksLikeLocale && cacheIdCookie) {
-    return NextResponse.next()
+    return NextResponse.next({ request: { headers: requestHeaders } })
   }
 
-  let response = NextResponse.next()
-
-  // Ensure cache id cookie exists (set without redirect)
   const cacheId = cacheIdCookie?.value || crypto.randomUUID()
-  if (!cacheIdCookie) {
-    response.cookies.set("_medusa_cache_id", cacheId, {
-      maxAge: 60 * 60 * 24,
-    })
-  }
-
   const regionMap = await getRegionMap(cacheId)
   const countryCode = regionMap && (await getCountryCode(request, regionMap))
 
   const urlHasCountryCode =
-    countryCode && request.nextUrl.pathname.split("/")[1].includes(countryCode)
+    countryCode && segments[localeIndex]?.includes(countryCode)
 
   // If no country code in URL but we can resolve one, redirect to locale-prefixed path
   if (!urlHasCountryCode && countryCode) {
@@ -132,7 +136,21 @@ export async function middleware(request: NextRequest) {
       request.nextUrl.pathname === "/" ? "" : request.nextUrl.pathname
     const queryString = request.nextUrl.search ? request.nextUrl.search : ""
     const redirectUrl = `${request.nextUrl.origin}/${countryCode}${redirectPath}${queryString}`
-    return NextResponse.redirect(redirectUrl, 307)
+    const redirect = NextResponse.redirect(redirectUrl, 307)
+    if (!cacheIdCookie) {
+      redirect.cookies.set("_medusa_cache_id", cacheId, {
+        maxAge: 60 * 60 * 24,
+      })
+    }
+    return redirect
+  }
+
+  const response = NextResponse.next({ request: { headers: requestHeaders } })
+
+  if (!cacheIdCookie) {
+    response.cookies.set("_medusa_cache_id", cacheId, {
+      maxAge: 60 * 60 * 24,
+    })
   }
 
   return response
