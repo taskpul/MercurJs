@@ -1,8 +1,8 @@
 import Image from "next/image"
 import { HttpTypes } from "@medusajs/types"
 
-import { CartDropdown, MobileNavbar, Navbar } from "@/components/cells"
-import { HeartIcon, MessageIcon } from "@/icons"
+import { CartDropdown, MobileNavbar } from "@/components/cells"
+import { HeartIcon } from "@/icons"
 import { listCategories } from "@/lib/data/categories"
 import { PARENT_CATEGORIES } from "@/const"
 import { retrieveCart } from "@/lib/data/cart"
@@ -38,7 +38,7 @@ export const Header = async () => {
   }
 
   return (
-    <header>
+    <header className="sticky top-0 z-50 bg-primary border-b border-primary">
       <div className="mx-auto flex w-full max-w-[1344px] py-2 px-4 lg:px-8">
         <div className="flex items-center lg:w-1/3">
           <MobileNavbar
@@ -53,10 +53,12 @@ export const Header = async () => {
           <LocalizedClientLink href="/" className="text-2xl font-bold">
             <Image
               src="/Logo.svg"
-              width={126}
-              height={40}
+              width={135}
+              height={37}
               alt="Logo"
               priority
+              sizes="(max-width: 1024px) 110px, 135px"
+              className="w-[110px] h-[30px] lg:w-[135px] lg:h-[37px]"
             />
           </LocalizedClientLink>
         </div>
@@ -78,7 +80,6 @@ export const Header = async () => {
           <CartDropdown cart={cart} />
         </div>
       </div>
-      <Navbar categories={categories} />
     </header>
   )
 }
