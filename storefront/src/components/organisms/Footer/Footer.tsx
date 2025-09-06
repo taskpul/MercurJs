@@ -23,9 +23,9 @@ export function Footer() {
             <Image
               src="/Logo.svg"
               alt="Mercur logo"
-              width={32}
-              height={32}
-              className="h-8 w-8"
+              width={135}
+              height={37}
+              className="w-[110px] h-[30px] lg:w-[135px] lg:h-[37px]"
             />
             <span className="text-lg font-medium">Mercur</span>
           </div>

@@ -16,7 +16,7 @@ export const Hero = ({ heading, paragraph, buttons }: HeroProps) => {
   return (
     <section className="w-full bg-[#20116b] py-32 text-white">
       <div className="container flex flex-col items-center text-center gap-6">
-        <h1 className="text-4xl md:text-6xl font-bold max-w-3xl">
+        <h1 className="text-[2.5rem] font-bold max-w-3xl">
           {heading}
         </h1>
         <p className="text-lg md:text-xl max-w-2xl text-white/80">
