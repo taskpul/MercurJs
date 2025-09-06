@@ -59,7 +59,7 @@ export const vendorMiddlewares: MiddlewareRoute[] = [
     matcher: '/vendor/sellers',
     method: ['POST'],
     middlewares: [
-      authenticate('vendor-admin', ['bearer', 'session'], {
+      authenticate('seller', ['bearer', 'session'], {
         allowUnregistered: true
       })
     ]
@@ -68,7 +68,7 @@ export const vendorMiddlewares: MiddlewareRoute[] = [
     matcher: '/vendor/invites/accept',
     method: ['POST'],
     middlewares: [
-      authenticate('vendor-admin', ['bearer', 'session'], {
+      authenticate('seller', ['bearer', 'session'], {
         allowUnregistered: true
       })
     ]
@@ -82,7 +82,7 @@ export const vendorMiddlewares: MiddlewareRoute[] = [
       ),
       unlessBaseUrl(
         /^\/vendor\/(sellers|invites\/accept)$/,
-        authenticate('vendor-admin', ['bearer', 'session'], {
+        authenticate('seller', ['bearer', 'session'], {
           allowUnregistered: false
         })
       ),
