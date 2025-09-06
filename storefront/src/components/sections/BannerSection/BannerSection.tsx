@@ -4,38 +4,51 @@ import Image from "next/image"
 
 export const BannerSection = () => {
   return (
-    <section className="bg-tertiary container text-tertiary">
-      <div className="grid grid-cols-1 lg:grid-cols-2 items-center">
-        <div className="py-6 px-6 flex flex-col h-full justify-between border border-secondary rounded-sm">
-          <div className="mb-8 lg:mb-48">
-            <span className="text-sm inline-block px-4 py-1 border border-secondary rounded-sm">
-              #COLLECTION
-            </span>
-            <h2 className="display-sm">
-              BOHO VIBES: WHERE COMFORT MEETS CREATIVITY
-            </h2>
-            <p className="text-lg text-tertiary max-w-lg">
-              Discover boho styles that inspire adventure and embrace the beauty
-              of the unconventional.
-            </p>
-          </div>
-          <LocalizedClientLink href="/collections/boho">
-            <Button size="large" className="w-fit bg-secondary/10">
-              EXPLORE
-            </Button>
-          </LocalizedClientLink>
-        </div>
-        <div className="relative aspect-[4/3] lg:aspect-auto lg:h-full flex justify-end rounded-sm">
+    <section className="container bg-primary text-primary">
+      <div className="grid grid-cols-1 lg:grid-cols-2 gap-8 items-center">
+        <div className="relative aspect-[4/3] w-full">
           <Image
             loading="lazy"
             fetchPriority="high"
             src="/images/banner-section/Image.jpg"
-            alt="Boho fashion collection - Model wearing a floral dress with yellow boots"
+            alt="Marketplace case study screenshot"
             width={700}
             height={600}
-            className="object-cover object-top rounded-sm"
+            className="object-cover rounded-sm"
             sizes="(min-width: 1024px) 50vw, 100vw"
           />
+        </div>
+        <div className="flex flex-col justify-center h-full">
+          <Image
+            src="/Logo.png"
+            alt="Notup logo"
+            width={120}
+            height={40}
+            className="mb-4 w-auto h-auto"
+          />
+          <h2 className="display-sm mb-4">
+            Custom Marketplace built in 9 Weeks
+          </h2>
+          <p className="text-lg text-secondary mb-6 max-w-md">
+            Notup is a rising star in the DACH marketplace for local products,
+            migrating from Storefront to a customizable Mercur Marketplace
+            Platform.
+          </p>
+          <div className="flex gap-8 mb-8">
+            <div>
+              <p className="heading-xl">1000+</p>
+              <p className="text-sm uppercase text-secondary">Products</p>
+            </div>
+            <div>
+              <p className="heading-xl">150+</p>
+              <p className="text-sm uppercase text-secondary">Vendors</p>
+            </div>
+          </div>
+          <LocalizedClientLink href="#">
+            <Button size="large" className="w-fit">
+              Explore Case Study
+            </Button>
+          </LocalizedClientLink>
         </div>
       </div>
     </section>
