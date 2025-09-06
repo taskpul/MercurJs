@@ -1,58 +1,40 @@
-import Image from "next/image"
-
-import tailwindConfig from "../../../../tailwind.config"
-import { ArrowRightIcon } from "@/icons"
 import Link from "next/link"
 
 type HeroProps = {
-  image: string
   heading: string
   paragraph: string
   buttons: { label: string; path: string }[]
 }
 
-export const Hero = ({ image, heading, paragraph, buttons }: HeroProps) => {
+export const Hero = ({ heading, paragraph, buttons }: HeroProps) => {
+  const baseButton = "px-6 py-3 rounded-sm font-medium transition-colors"
+  const primaryButton =
+    "bg-primary text-action hover:bg-action hover:text-tertiary"
+  const secondaryButton =
+    "border border-current text-tertiary hover:bg-primary hover:text-action"
+
   return (
-    <section className="w-full flex container mt-5 flex-col lg:flex-row text-primary">
-      <Image
-        src={decodeURIComponent(image)}
-        width={700}
-        height={600}
-        alt={`Hero banner - ${heading}`}
-        className="w-full order-2 lg:order-1"
-        priority
-        fetchPriority="high"
-        quality={50}
-        sizes="(min-width: 1024px) 50vw, 100vw"
-      />
-      <div className="w-full lg:order-2">
-        <div className="border rounded-sm w-full px-6 flex items-end h-[calc(100%-144px)]">
-          <div>
-            <h2 className="font-bold mb-6 uppercase display-md max-w-[652px] text-4xl md:text-5xl leading-tight">
-              {heading}
-            </h2>
-            <p className="text-lg mb-8">{paragraph}</p>
-          </div>
-        </div>
-        {buttons.length && (
-          <div className="h-[72px] lg:h-[144px] flex font-bold uppercase">
-            {buttons.map(({ label, path }) => (
+    <section className="w-full bg-action py-24 text-tertiary">
+      <div className="container flex flex-col items-center text-center gap-6">
+        <h1 className="text-4xl md:text-6xl font-bold max-w-3xl">
+          {heading}
+        </h1>
+        <p className="text-lg md:text-xl max-w-2xl text-tertiary/80">
+          {paragraph}
+        </p>
+        {buttons.length > 0 && (
+          <div className="flex gap-4 mt-4">
+            {buttons.map(({ label, path }, i) => (
               <Link
                 key={path}
                 href={path}
-                className="group flex border rounded-sm h-full w-1/2 bg-content hover:bg-action hover:text-tertiary transition-all duration-300 p-6 justify-between items-end"
+                className={`${baseButton} ${
+                  i === 0 ? primaryButton : secondaryButton
+                }`}
                 aria-label={label}
                 title={label}
               >
-                <span>
-                  <span className="group-hover:inline-flex hidden">#</span>
-                  {label}
-                </span>
-
-                <ArrowRightIcon
-                  color={tailwindConfig.theme.extend.backgroundColor.primary}
-                  aria-hidden
-                />
+                {label}
               </Link>
             ))}
           </div>
@@ -61,3 +43,4 @@ export const Hero = ({ image, heading, paragraph, buttons }: HeroProps) => {
     </section>
   )
 }
+

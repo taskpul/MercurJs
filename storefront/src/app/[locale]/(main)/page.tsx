@@ -124,13 +124,6 @@ export default async function Home({
 
   return (
     <main className="flex flex-col gap-8 row-start-2 items-center sm:items-start text-primary">
-      <link
-        rel="preload"
-        as="image"
-        href="/images/hero/Image.jpg"
-        imageSrcSet="/images/hero/Image.jpg 700w"
-        imageSizes="(min-width: 1024px) 50vw, 100vw"
-      />
       {/* Organization JSON-LD */}
       <Script
         id="ld-org"
@@ -161,17 +154,13 @@ export default async function Home({
       />
 
       <Hero
-        image="/images/hero/Image.jpg"
-        heading="Snag your style in a flash"
-        paragraph="Buy, sell, and discover pre-loved gems from the trendiest brands."
+        heading="Modern marketplace platform without limits"
+        paragraph="Open source marketplace platform built to avoid vendor lock. Modern tech, unlimited customization, no transaction fee."
         buttons={[
-          { label: "Buy now", path: "/categories" },
+          { label: "Schedule a demo", path: "#" },
           {
-            label: "Sell now",
-            path:
-              process.env.NEXT_PUBLIC_ALGOLIA_ID === "UO3C5Y8NHX"
-                ? "https://vendor-sandbox.vercel.app/"
-                : "https://vendor.mercurjs.com",
+            label: "Visit GitHub",
+            path: "https://github.com/mercurjs/mercur",
           },
         ]}
       />
