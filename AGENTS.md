@@ -21,7 +21,6 @@ When working in the **`storefront/`** folder:
 - **APIs**: Consume Medusa’s Store API via the SDK or REST endpoints.
 - **Authentication**: Use provided utilities for customer sessions; **do not roll your own**.
 - **Cart/Checkout**: Use Medusa’s workflows and providers; avoid custom logic unless extending officially.
-- **Styling**: Reuse design system tokens; **no ad-hoc styles**.
 - **Components**: Reuse existing components, styles, and design tokens for consistency.
 - **Testing**:  
   - Component/unit tests for UI.  
