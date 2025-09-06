@@ -1,0 +1,18 @@
+const CHUNK_PUBLIC_PATH = "server/app/[locale]/(main)/collections/[handle]/page.js";
+const runtime = require("../../../../../chunks/ssr/[turbopack]_runtime.js");
+runtime.loadChunk("server/chunks/ssr/node_modules_next_dist_e80316._.js");
+runtime.loadChunk("server/chunks/ssr/[root of the server]__592060._.js");
+runtime.loadChunk("server/chunks/ssr/src_app_896cde._.js");
+runtime.loadChunk("server/chunks/ssr/[root of the server]__176d16._.js");
+runtime.loadChunk("server/chunks/ssr/[root of the server]__ac2e5b._.css");
+runtime.loadChunk("server/chunks/ssr/src_862b0b._.js");
+runtime.loadChunk("server/chunks/ssr/node_modules_490daf._.js");
+runtime.loadChunk("server/chunks/ssr/node_modules_next_dist_client_components_unauthorized-error_d758e6.js");
+runtime.loadChunk("server/chunks/ssr/src_app_global-error_tsx_55201b._.js");
+runtime.loadChunk("server/chunks/ssr/[root of the server]__88e152._.js");
+runtime.loadChunk("server/chunks/ssr/node_modules_next_8b14f4._.js");
+runtime.loadChunk("server/chunks/ssr/node_modules_@medusajs_js-sdk_dist_esm_8eaff9._.js");
+runtime.loadChunk("server/chunks/ssr/node_modules_03e9f9._.js");
+runtime.loadChunk("server/chunks/ssr/_0006d8._.js");
+runtime.getOrInstantiateRuntimeModule("[project]/.next-internal/server/app/[locale]/(main)/collections/[handle]/page/actions.js { ACTIONS_MODULE0 => \"[project]/src/lib/data/reviews.ts [app-rsc] (ecmascript)\", ACTIONS_MODULE1 => \"[project]/src/lib/data/regions.ts [app-rsc] (ecmascript)\", ACTIONS_MODULE2 => \"[project]/src/lib/data/cart.ts [app-rsc] (ecmascript)\", ACTIONS_MODULE3 => \"[project]/src/lib/data/products.ts [app-rsc] (ecmascript)\", ACTIONS_MODULE4 => \"[project]/src/lib/data/wishlist.ts [app-rsc] (ecmascript)\", ACTIONS_MODULE5 => \"[project]/src/lib/data/customer.ts [app-rsc] (ecmascript)\", ACTIONS_MODULE6 => \"[project]/src/lib/data/collections.ts [app-rsc] (ecmascript)\" } [app-rsc] (ecmascript)", CHUNK_PUBLIC_PATH);
+module.exports = runtime.getOrInstantiateRuntimeModule("[project]/node_modules/next/dist/esm/build/templates/app-page.js?page=/[locale]/(main)/collections/[handle]/page { GLOBAL_ERROR_MODULE => \"[project]/src/app/global-error.tsx [app-rsc] (ecmascript, Next.js server component)\", METADATA_0 => \"[project]/src/app/favicon.ico.mjs { IMAGE => \\\"[project]/src/app/favicon.ico [app-rsc] (static)\\\" } [app-rsc] (structured image object, ecmascript, Next.js server component)\", MODULE_1 => \"[project]/src/app/layout.tsx [app-rsc] (ecmascript, Next.js server component)\", MODULE_2 => \"[project]/src/app/not-found.tsx [app-rsc] (ecmascript, Next.js server component)\", MODULE_3 => \"[project]/node_modules/next/dist/client/components/forbidden-error.js [app-rsc] (ecmascript, Next.js server component)\", MODULE_4 => \"[project]/node_modules/next/dist/client/components/unauthorized-error.js [app-rsc] (ecmascript, Next.js server component)\", MODULE_5 => \"[project]/src/app/global-error.tsx [app-rsc] (ecmascript, Next.js server component)\", MODULE_6 => \"[project]/src/app/[locale]/(main)/layout.tsx [app-rsc] (ecmascript, Next.js server component)\", MODULE_7 => \"[project]/src/app/[locale]/(main)/collections/[handle]/page.tsx [app-rsc] (ecmascript, Next.js server component)\" } [app-rsc] (ecmascript)", CHUNK_PUBLIC_PATH).exports;

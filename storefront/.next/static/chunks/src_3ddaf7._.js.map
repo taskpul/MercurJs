@@ -1,0 +1,7 @@
+{
+  "version": 3,
+  "sources": [],
+  "sections": [
+    {"offset": {"line": 7, "column": 0}, "map": {"version":3,"sources":["file:///root/webmakerr/storefront/src/components/sections/UserMessagesSection/UserMessagesSection.tsx"],"sourcesContent":["\"use client\"\n\nimport { Inbox } from \"@talkjs/react\"\nimport { useCallback } from \"react\"\nimport Talk from \"talkjs\"\n\nexport const UserMessagesSection = () => {\n  const syncConversation = useCallback((session: Talk.Session) => {\n    const conversation = session.getOrCreateConversation(\n      \"my_conversations\" + session.me.id\n    )\n    conversation.setParticipant(session.me)\n    return conversation\n  }, [])\n\n  return (\n    <div className=\"max-w-full h-[655px]\">\n      <Inbox\n        loadingComponent={\n          <div className=\"h-96 w-full flex items-center justify-center\">\n            Loading..\n          </div>\n        }\n        syncConversation={syncConversation}\n        className=\"h-full max-w-[760px] w-full\"\n      />\n    </div>\n  )\n}\n"],"names":[],"mappings":";;;;AAEA;AACA;;;AAHA;;;AAMO,MAAM,sBAAsB;;IACjC,MAAM,mBAAmB,CAAA,GAAA,6JAAA,CAAA,cAAW,AAAD;6DAAE,CAAC;YACpC,MAAM,eAAe,QAAQ,uBAAuB,CAClD,qBAAqB,QAAQ,EAAE,CAAC,EAAE;YAEpC,aAAa,cAAc,CAAC,QAAQ,EAAE;YACtC,OAAO;QACT;4DAAG,EAAE;IAEL,qBACE,6LAAC;QAAI,WAAU;kBACb,cAAA,6LAAC,+JAAA,CAAA,QAAK;YACJ,gCACE,6LAAC;gBAAI,WAAU;0BAA+C;;;;;;YAIhE,kBAAkB;YAClB,WAAU;;;;;;;;;;;AAIlB;GAtBa;KAAA"}},
+    {"offset": {"line": 58, "column": 0}, "map": {"version":3,"sources":[],"names":[],"mappings":"A"}}]
+}

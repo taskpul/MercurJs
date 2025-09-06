@@ -1,0 +1,6 @@
+"use strict";
+Object.defineProperty(exports, "__esModule", { value: true });
+exports.VendorGetProductCategoriesParams = void 0;
+const validators_1 = require("@medusajs/medusa/api/admin/product-categories/validators");
+exports.VendorGetProductCategoriesParams = validators_1.AdminProductCategoriesParams;
+//# sourceMappingURL=data:application/json;base64,eyJ2ZXJzaW9uIjozLCJmaWxlIjoidmFsaWRhdG9ycy5qcyIsInNvdXJjZVJvb3QiOiIiLCJzb3VyY2VzIjpbIi4uLy4uLy4uLy4uLy4uLy4uL3NyYy9hcGkvdmVuZG9yL3Byb2R1Y3QtY2F0ZWdvcmllcy92YWxpZGF0b3JzLnRzIl0sIm5hbWVzIjpbXSwibWFwcGluZ3MiOiI7OztBQUNBLHlGQUF1RztBQUsxRixRQUFBLGdDQUFnQyxHQUFHLHlDQUE0QixDQUFBIn0=
