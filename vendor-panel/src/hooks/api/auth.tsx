@@ -40,6 +40,7 @@ export const useSignUpWithEmailPass = (
         member: {
           name: variables.name,
           email: variables.email,
+          role: "admin",
         },
       }
       await fetchQuery("/vendor/sellers", {
