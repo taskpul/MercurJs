@@ -38,6 +38,7 @@
     "@mercurjs/reviews": "*",
     "@mercurjs/payout": "*",
     "@mercurjs/brand": "*",
+    "@mercurjs/tenant": "*",
     "@mercurjs/commission": "*",
     "@mercurjs/wishlist": "*",
     "@mercurjs/attribute": "*",
