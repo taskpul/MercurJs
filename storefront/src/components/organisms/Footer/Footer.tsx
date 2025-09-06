@@ -14,20 +14,26 @@ const POLICY_LINKS = [
   { label: "Privacy Policy", path: "#" },
 ]
 
-export function Footer() {
+export function Footer({
+  logo,
+  storeName,
+}: {
+  logo?: string
+  storeName?: string
+}) {
   return (
     <footer className="border-t">
       <div className="container">
         <div className="flex flex-col items-center justify-between gap-y-6 py-8 md:flex-row">
           <div className="flex items-center gap-x-2">
             <Image
-              src="/Logo.svg"
-              alt="Mercur logo"
+              src={logo || "/Logo.svg"}
+              alt={`${storeName || "Mercur"} logo`}
               width={135}
               height={37}
               className="w-[110px] h-[30px] lg:w-[135px] lg:h-[37px]"
             />
-            <span className="text-lg font-medium">Mercur</span>
+            <span className="text-lg font-medium">{storeName || "Mercur"}</span>
           </div>
 
           <nav
