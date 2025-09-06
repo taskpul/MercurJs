@@ -4,6 +4,8 @@ import "./globals.css"
 import { Toaster } from "@medusajs/ui"
 import Head from "next/head"
 import Script from "next/script"
+import { retrieveTenant } from "@/lib/data/tenant"
+import { hexToRgb } from "@/lib/helpers/hex-to-rgb"
 
 const poppins = Poppins({
   subsets: ["latin"],
@@ -11,27 +13,44 @@ const poppins = Poppins({
   variable: "--font-poppins",
 })
 
-export const metadata: Metadata = {
-  title: {
-    template: `%s | ${
-      process.env.NEXT_PUBLIC_SITE_NAME ||
-      "Mercur B2C Demo - Marketplace Storefront"
-    }`,
-    default:
-      process.env.NEXT_PUBLIC_SITE_NAME ||
-      "Mercur B2C Demo - Marketplace Storefront",
-  },
-  description:
+export async function generateMetadata({
+  params,
+}: {
+  params: Promise<{ tenant?: string }>
+}): Promise<Metadata> {
+  const { tenant } = await params
+  const settings = tenant ? await retrieveTenant(tenant) : null
+
+  const siteName =
+    settings?.settings?.store_name ||
+    process.env.NEXT_PUBLIC_SITE_NAME ||
+    "Mercur B2C Demo - Marketplace Storefront"
+
+  const description =
+    settings?.settings?.store_description ||
     process.env.NEXT_PUBLIC_SITE_DESCRIPTION ||
-    "Mercur B2C Demo - Marketplace Storefront",
-  metadataBase: new URL(
-    process.env.NEXT_PUBLIC_BASE_URL || "http://localhost:3000"
-  ),
-  alternates: {
-    languages: {
-      "x-default": process.env.NEXT_PUBLIC_BASE_URL || "http://localhost:3000",
+    "Mercur B2C Demo - Marketplace Storefront"
+
+  const base = process.env.NEXT_PUBLIC_BASE_URL || "http://localhost:3000"
+
+  const icons = settings?.settings?.logo
+    ? [{ url: settings.settings.logo }]
+    : undefined
+
+  return {
+    title: {
+      template: `%s | ${siteName}`,
+      default: siteName,
     },
-  },
+    description,
+    metadataBase: new URL(base),
+    alternates: {
+      languages: {
+        "x-default": base,
+      },
+    },
+    ...(icons ? { icons: { icon: icons } } : {}),
+  }
 }
 
 export default async function RootLayout({
@@ -39,12 +58,24 @@ export default async function RootLayout({
   params,
 }: Readonly<{
   children: React.ReactNode
-  params: Promise<{ locale: string }>
+  params: Promise<{ locale: string; tenant?: string }>
 }>) {
-  const { locale } = await params
+  const { locale, tenant } = await params
+  const tenantData = tenant ? await retrieveTenant(tenant) : null
 
   const ALGOLIA_APP = process.env.NEXT_PUBLIC_ALGOLIA_ID
   const htmlLang = locale || "en"
+
+  const primary = tenantData?.settings?.primary_color
+  const secondary = tenantData?.settings?.secondary_color
+
+  const style = primary || secondary
+    ? `:root {${
+        primary
+          ? `--brand-900: ${hexToRgb(primary)}; --brand-800: ${hexToRgb(primary)}; --brand-700: ${hexToRgb(primary)}; --bg-action-primary: var(--brand-900); --content-action-primary: var(--brand-900); --border-action: var(--brand-900);`
+          : ""
+      }${secondary ? ` --bg-primary: ${hexToRgb(secondary)};` : ""} }`
+    : undefined
 
   return (
     <html lang={htmlLang} className={poppins.variable}>
@@ -114,6 +145,7 @@ export default async function RootLayout({
           crossOrigin="anonymous"
         />
         <link rel="dns-prefetch" href="https://api.mercurjs.com" />
+        {style && <style>{style}</style>}
       </Head>
       <body className="font-sans antialiased bg-primary text-secondary relative">
         <Script

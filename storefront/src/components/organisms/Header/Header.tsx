@@ -17,7 +17,7 @@ import LocalizedClientLink from "@/components/molecules/LocalizedLink/LocalizedL
 import { MessageButton } from "@/components/molecules/MessageButton/MessageButton"
 import { SellNowButton } from "@/components/cells/SellNowButton/SellNowButton"
 
-export const Header = async () => {
+export const Header = async ({ logo }: { logo?: string }) => {
   const cart = await retrieveCart().catch(() => null)
   const user = await retrieveCustomer()
   let wishlist: Wishlist[] = []
@@ -52,7 +52,7 @@ export const Header = async () => {
         <div className="flex lg:justify-center lg:w-1/3 items-center pl-4 lg:pl-0">
           <LocalizedClientLink href="/" className="text-2xl font-bold">
             <Image
-              src="/Logo.svg"
+              src={logo || "/Logo.svg"}
               width={135}
               height={37}
               alt="Logo"
