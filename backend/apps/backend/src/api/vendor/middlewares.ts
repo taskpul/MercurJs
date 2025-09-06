@@ -3,7 +3,8 @@ import { MiddlewareRoute, authenticate } from '@medusajs/framework'
 import {
   checkSellerApproved,
   storeActiveGuard,
-  filterByTenantId
+  filterByTenantId,
+  ensureTenantAccess
 } from '../../shared/infra/http/middlewares'
 import { unlessBaseUrl } from '../../shared/infra/http/utils'
 import { vendorAttributeMiddlewares } from './attributes/middlewares'
@@ -58,7 +59,7 @@ export const vendorMiddlewares: MiddlewareRoute[] = [
     matcher: '/vendor/sellers',
     method: ['POST'],
     middlewares: [
-      authenticate('seller', ['bearer', 'session'], {
+      authenticate('vendor-admin', ['bearer', 'session'], {
         allowUnregistered: true
       })
     ]
@@ -67,7 +68,7 @@ export const vendorMiddlewares: MiddlewareRoute[] = [
     matcher: '/vendor/invites/accept',
     method: ['POST'],
     middlewares: [
-      authenticate('seller', ['bearer', 'session'], {
+      authenticate('vendor-admin', ['bearer', 'session'], {
         allowUnregistered: true
       })
     ]
@@ -81,10 +82,11 @@ export const vendorMiddlewares: MiddlewareRoute[] = [
       ),
       unlessBaseUrl(
         /^\/vendor\/(sellers|invites\/accept)$/,
-        authenticate('seller', ['bearer', 'session'], {
+        authenticate('vendor-admin', ['bearer', 'session'], {
           allowUnregistered: false
         })
       ),
+      ensureTenantAccess(),
       unlessBaseUrl(
         /^\/vendor\/(sellers|orders|fulfillment|invites\/accept)/,
         storeActiveGuard
