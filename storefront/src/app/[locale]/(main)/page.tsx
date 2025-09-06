@@ -165,10 +165,10 @@ export default async function Home({
           },
         ]}
       />
+      <CommerceModulesSection />
       <div className="px-4 lg:px-8 w-full">
         <HomeProductSection heading="trending listings" locale={locale} home />
       </div>
-      <CommerceModulesSection />
       <div className="px-4 lg:px-8 w-full">
         <HomeCategories heading="SHOP BY CATEGORY" />
       </div>
