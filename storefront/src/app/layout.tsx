@@ -1,13 +1,13 @@
 import type { Metadata } from "next"
-import { Funnel_Display } from "next/font/google"
+import { Poppins } from "next/font/google"
 import "./globals.css"
 import { Toaster } from "@medusajs/ui"
 import Head from "next/head"
 
-const funnelDisplay = Funnel_Display({
-  variable: "--font-funnel-sans",
+const poppins = Poppins({
   subsets: ["latin"],
   weight: ["300", "400", "500", "600"],
+  variable: "--font-poppins",
 })
 
 export const metadata: Metadata = {
@@ -46,7 +46,7 @@ export default async function RootLayout({
   const htmlLang = locale || "en"
 
   return (
-    <html lang={htmlLang} className="">
+    <html lang={htmlLang} className={poppins.variable}>
       <Head>
         <link
           rel="preconnect"
@@ -114,9 +114,7 @@ export default async function RootLayout({
         />
         <link rel="dns-prefetch" href="https://api.mercurjs.com" />
       </Head>
-      <body
-        className={`${funnelDisplay.className} antialiased bg-primary text-secondary relative`}
-      >
+      <body className="font-sans antialiased bg-primary text-secondary relative">
         {children}
         <Toaster position="top-right" />
       </body>
