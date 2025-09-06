@@ -9,17 +9,17 @@ type HeroProps = {
 export const Hero = ({ heading, paragraph, buttons }: HeroProps) => {
   const baseButton = "px-6 py-3 rounded-sm font-medium transition-colors"
   const primaryButton =
-    "bg-primary text-action hover:bg-action hover:text-tertiary"
+    "bg-white text-[#20116b] hover:bg-[#20116b] hover:text-white"
   const secondaryButton =
-    "border border-current text-tertiary hover:bg-primary hover:text-action"
+    "border border-white text-white hover:bg-white hover:text-[#20116b]"
 
   return (
-    <section className="w-full bg-action py-24 text-tertiary">
+    <section className="w-full bg-[#20116b] py-32 text-white">
       <div className="container flex flex-col items-center text-center gap-6">
         <h1 className="text-4xl md:text-6xl font-bold max-w-3xl">
           {heading}
         </h1>
-        <p className="text-lg md:text-xl max-w-2xl text-tertiary/80">
+        <p className="text-lg md:text-xl max-w-2xl text-white/80">
           {paragraph}
         </p>
         {buttons.length > 0 && (
