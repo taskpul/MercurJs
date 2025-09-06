@@ -39,7 +39,7 @@ export const Header = async () => {
 
   return (
     <header>
-      <div className="flex py-2 lg:px-8 px-4">
+      <div className="mx-auto flex w-full max-w-[1344px] py-2 px-4 lg:px-8">
         <div className="flex items-center lg:w-1/3">
           <MobileNavbar
             parentCategories={parentCategories}
