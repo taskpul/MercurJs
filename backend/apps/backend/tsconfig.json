@@ -20,7 +20,9 @@
     "checkJs": false,
     "strictNullChecks": true,
     "paths": {
-      "#/*": ["src/*"]
+      "#/*": ["src/*"],
+      "@mercurjs/framework": ["../../packages/framework"],
+      "@mercurjs/*": ["../../packages/modules/*"]
     }
   },
   "ts-node": {
