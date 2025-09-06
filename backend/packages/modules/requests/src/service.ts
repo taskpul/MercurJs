@@ -1,8 +1,8 @@
-import { MedusaService } from "@medusajs/framework/utils";
+import { TenantScopedService } from "@mercurjs/framework";
 
 import { Request } from "./models";
 
-class RequestsModuleService extends MedusaService({
+class RequestsModuleService extends TenantScopedService({
   Request,
 }) {}
 
