@@ -4,6 +4,7 @@ import {
   createFindParams,
   createSelectParams
 } from '@medusajs/medusa/api/utils/validators'
+import { MemberRole } from '@mercurjs/framework'
 
 export type VendorGetSellerParamsType = z.infer<typeof VendorGetSellerParams>
 export const VendorGetSellerParams = createSelectParams()
@@ -101,6 +102,7 @@ export const VendorCreateSeller = z
     member: z.object({
       name: z.string(),
       email: z.string().email(),
+      role: z.nativeEnum(MemberRole).optional(),
       bio: z.string().nullish().optional(),
       phone: z.string().nullish().optional(),
       photo: z.string().nullish().optional()

@@ -2,7 +2,8 @@ import { MiddlewareRoute, authenticate } from '@medusajs/framework'
 
 import {
   checkSellerApproved,
-  storeActiveGuard
+  storeActiveGuard,
+  filterByTenantId
 } from '../../shared/infra/http/middlewares'
 import { unlessBaseUrl } from '../../shared/infra/http/utils'
 import { vendorAttributeMiddlewares } from './attributes/middlewares'
@@ -87,7 +88,8 @@ export const vendorMiddlewares: MiddlewareRoute[] = [
       unlessBaseUrl(
         /^\/vendor\/(sellers|orders|fulfillment|invites\/accept)/,
         storeActiveGuard
-      )
+      ),
+      filterByTenantId()
     ]
   },
   ...vendorMeMiddlewares,
