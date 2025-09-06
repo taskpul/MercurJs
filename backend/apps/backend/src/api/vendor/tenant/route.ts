@@ -26,11 +26,21 @@ export const POST = async (
     throw new MedusaError(MedusaError.Types.NOT_FOUND, 'Tenant not found')
   }
 
-  const settings = { ...(tenant.settings || {}), ...req.validatedBody }
+  const { domain, logo, primary_color, secondary_color, store_name, store_description } =
+    req.validatedBody
 
-  const updated = await tenantService.updateTenants({
-    id: tenant.id,
-    settings
+  const settings = {
+    ...(tenant.settings || {}),
+    ...(store_name ? { store_name } : {}),
+    ...(store_description ? { store_description } : {}),
+  }
+
+  const updated = await tenantService.updateTenant(tenant.id, {
+    domain,
+    logo,
+    primary_color,
+    secondary_color,
+    settings,
   })
 
   res.json({ tenant: updated })

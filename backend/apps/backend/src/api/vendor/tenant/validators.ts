@@ -6,6 +6,7 @@ export type VendorUpdateTenantSettingsType = z.infer<typeof VendorUpdateTenantSe
 
 export const VendorUpdateTenantSettings = z
   .object({
+    domain: z.string().optional(),
     logo: z.string().url().optional(),
     primary_color: z.string().regex(colorRegex).optional(),
     secondary_color: z.string().regex(colorRegex).optional(),
