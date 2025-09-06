@@ -1,68 +1,71 @@
+import Image from "next/image"
 import LocalizedClientLink from "@/components/molecules/LocalizedLink/LocalizedLink"
-import footerLinks from "@/data/footerLinks"
+
+const NAV_LINKS = [
+  { label: "About", path: "#" },
+  { label: "Features", path: "#" },
+  { label: "Contact", path: "#" },
+  { label: "Docs", path: "#" },
+  { label: "GitHub", path: "https://github.com/" },
+]
+
+const POLICY_LINKS = [
+  { label: "Cookie Settings", path: "#" },
+  { label: "Privacy Policy", path: "#" },
+]
 
 export function Footer() {
   return (
-    <footer className="bg-primary container">
-      <div className="grid grid-cols-1 lg:grid-cols-3">
-        {/* Customer Services Column */}
-        <div className="p-6 border rounded-sm">
-          <h2 className="heading-sm text-primary mb-3 uppercase">
-            Customer services
-          </h2>
-          <nav className="space-y-3" aria-label="Customer services navigation">
-            {footerLinks.customerServices.map(({ label, path }) => (
-              <LocalizedClientLink
-                key={label}
-                href={path}
-                className="block label-md"
-              >
+    <footer className="border-t">
+      <div className="container">
+        <div className="flex flex-col items-center justify-between gap-y-6 py-8 md:flex-row">
+          <div className="flex items-center gap-x-2">
+            <Image
+              src="/Logo.svg"
+              alt="Mercur logo"
+              width={32}
+              height={32}
+              className="h-8 w-8"
+            />
+            <span className="text-lg font-medium">Mercur</span>
+          </div>
+
+          <nav
+            className="flex flex-wrap items-center justify-center gap-6 text-sm"
+            aria-label="Footer navigation"
+          >
+            {NAV_LINKS.map(({ label, path }) => (
+              path.startsWith("http") ? (
+                <a
+                  key={label}
+                  href={path}
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="hover:underline"
+                >
+                  {label}
+                </a>
+              ) : (
+                <LocalizedClientLink key={label} href={path} className="hover:underline">
+                  {label}
+                </LocalizedClientLink>
+              )
+            ))}
+          </nav>
+        </div>
+
+        <div className="flex flex-col items-center justify-between gap-y-4 border-t py-6 text-sm text-secondary md:flex-row">
+          <p>© 2025 Elixir, All rights reserved.</p>
+          <div className="flex gap-6">
+            {POLICY_LINKS.map(({ label, path }) => (
+              <LocalizedClientLink key={label} href={path} className="hover:underline">
                 {label}
               </LocalizedClientLink>
             ))}
-          </nav>
+          </div>
         </div>
-
-        {/* About Column */}
-        <div className="p-6 border rounded-sm">
-          <h2 className="heading-sm text-primary mb-3 uppercase">About</h2>
-          <nav className="space-y-3" aria-label="About navigation">
-            {footerLinks.about.map(({ label, path }) => (
-              <LocalizedClientLink
-                key={label}
-                href={path}
-                className="block label-md"
-              >
-                {label}
-              </LocalizedClientLink>
-            ))}
-          </nav>
-        </div>
-
-        {/* Connect Column */}
-        <div className="p-6 border rounded-sm">
-          <h2 className="heading-sm text-primary mb-3 uppercase">connect</h2>
-          <nav className="space-y-3" aria-label="Social media navigation">
-            {footerLinks.connect.map(({ label, path }) => (
-              <a
-                aria-label={`Go to ${label} page`}
-                title={`Go to ${label} page`}
-                key={label}
-                href={path}
-                className="block label-md"
-                target="_blank"
-                rel="noopener noreferrer"
-              >
-                {label}
-              </a>
-            ))}
-          </nav>
-        </div>
-      </div>
-
-      <div className="py-6 border rounded-sm ">
-        <p className="text-md text-secondary text-center ">© 2024 Fleek</p>
       </div>
     </footer>
   )
 }
+
