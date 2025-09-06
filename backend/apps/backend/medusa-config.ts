@@ -23,6 +23,7 @@ module.exports = defineConfig({
     { resolve: '@mercurjs/order-return-request' },
     { resolve: '@mercurjs/requests' },
     { resolve: '@mercurjs/brand' },
+    { resolve: '@mercurjs/tenant' },
     { resolve: '@mercurjs/wishlist' },
     { resolve: '@mercurjs/split-order-payment' },
     { resolve: '@mercurjs/attribute' },

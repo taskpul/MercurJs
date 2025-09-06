@@ -15,13 +15,16 @@ import {
   createSellerShippingOption,
   createSellerStockLocation,
   createServiceZoneForFulfillmentSet,
-  createStore
+  createStore,
+  createTenant
 } from './seed/seed-functions'
 
 export default async function seedMarketplaceData({ container }: ExecArgs) {
   const logger = container.resolve(ContainerRegistrationKeys.LOGGER)
 
   logger.info('=== Configurations ===')
+  logger.info('Creating tenant...')
+  await createTenant(container)
   logger.info('Creating default sales channel...')
   const salesChannel = await createSalesChannel(container)
   logger.info('Creating default regions...')
