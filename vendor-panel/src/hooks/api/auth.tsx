@@ -14,7 +14,7 @@ export const useSignInWithEmailPass = (
   >
 ) => {
   return useMutation({
-    mutationFn: (payload) => sdk.auth.login("seller", "emailpass", payload),
+    mutationFn: (payload) => sdk.auth.login("vendor-admin", "emailpass", payload),
     onSuccess: async (data, variables, context) => {
       options?.onSuccess?.(data, variables, context)
     },
@@ -33,7 +33,7 @@ export const useSignUpWithEmailPass = (
   >
 ) => {
   return useMutation({
-    mutationFn: (payload) => sdk.auth.register("seller", "emailpass", payload),
+    mutationFn: (payload) => sdk.auth.register("vendor-admin", "emailpass", payload),
     onSuccess: async (_, variables) => {
       const seller = {
         name: variables.name,
@@ -60,7 +60,7 @@ export const useSignUpForInvite = (
   >
 ) => {
   return useMutation({
-    mutationFn: (payload) => sdk.auth.register("seller", "emailpass", payload),
+    mutationFn: (payload) => sdk.auth.register("vendor-admin", "emailpass", payload),
     ...options,
   })
 }
@@ -70,7 +70,7 @@ export const useResetPasswordForEmailPass = (
 ) => {
   return useMutation({
     mutationFn: (payload) =>
-      sdk.auth.resetPassword("seller", "emailpass", {
+      sdk.auth.resetPassword("vendor-admin", "emailpass", {
         identifier: payload.email,
       }),
     onSuccess: async (data, variables, context) => {
@@ -93,7 +93,7 @@ export const useUpdateProviderForEmailPass = (
 ) => {
   return useMutation({
     mutationFn: (payload) =>
-      sdk.auth.updateProvider("seller", "emailpass", payload, token),
+      sdk.auth.updateProvider("vendor-admin", "emailpass", payload, token),
     onSuccess: async (data, variables, context) => {
       options?.onSuccess?.(data, variables, context)
     },
