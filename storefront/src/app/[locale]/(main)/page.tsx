@@ -166,6 +166,14 @@ export default async function Home({
         ]}
       />
       <CommerceModulesSection />
+      <Hero
+        heading="Modern marketplace platform without limits"
+        paragraph="Open source marketplace platform built to build or extend tools. Modern tech, unlimited customization, no transaction fee."
+        buttons={[
+          { label: "Schedule demo", path: "#" },
+          { label: "Visit GitHub", path: "https://github.com/mercurjs/mercur" },
+        ]}
+      />
       <div className="px-4 lg:px-8 w-full">
         <HomeProductSection heading="trending listings" locale={locale} home />
       </div>
