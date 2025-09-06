@@ -5,6 +5,10 @@
 @tailwind components;
 @tailwind utilities;
 
+body {
+  @apply font-sans;
+}
+
 /* Typography */
 .text-xl {
   @apply font-light tracking-normal;
