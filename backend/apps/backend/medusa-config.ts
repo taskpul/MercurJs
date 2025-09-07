@@ -19,7 +19,6 @@ module.exports = defineConfig({
     { resolve: './src/modules/product-tenant' },
     { resolve: './src/modules/order-tenant' },
     { resolve: './src/modules/customer-tenant' },
-    { resolve: '@mercurjs/seller' },
     { resolve: '@mercurjs/reviews' },
     { resolve: '@mercurjs/marketplace' },
     { resolve: '@mercurjs/configuration' },
@@ -51,12 +50,12 @@ module.exports = defineConfig({
         appId: process.env.ALGOLIA_APP_ID
       }
     },
-{
-  resolve: "@mercurjs/seller",
-  options: {
-    emailpass: true   // enables email/password registration
-  }
-},
+    {
+      resolve: '@mercurjs/seller',
+      options: {
+        emailpass: true // enables email/password registration
+      }
+    },
 
     {
       resolve: '@medusajs/medusa/payment',
