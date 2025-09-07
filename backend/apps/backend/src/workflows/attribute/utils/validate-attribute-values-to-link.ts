@@ -1,5 +1,4 @@
 import {
-  InferTypeOf,
   MedusaContainer,
   ProductCategoryDTO,
   ProductDTO
@@ -10,8 +9,13 @@ import {
   MedusaErrorTypes
 } from '@medusajs/framework/utils'
 
-import Attribute from '@mercurjs/attribute/src/models/attribute'
 import { ProductAttributeValueDTO } from '@mercurjs/framework'
+
+type AttributeRecord = {
+  id: string
+  possible_values?: { value: string }[]
+  product_categories?: ProductCategoryDTO[]
+}
 
 export const validateAttributeValuesToLink = async ({
   attributeValues,
@@ -24,12 +28,7 @@ export const validateAttributeValuesToLink = async ({
 }) => {
   const query = container.resolve(ContainerRegistrationKeys.QUERY)
 
-  const attributeMap = new Map<
-    string,
-    InferTypeOf<typeof Attribute> & {
-      product_categories?: ProductCategoryDTO[]
-    }
-  >()
+  const attributeMap = new Map<string, AttributeRecord>()
 
   for (const attrVal of attributeValues) {
     const id = attrVal.attribute_id

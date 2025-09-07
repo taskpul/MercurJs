@@ -22,7 +22,7 @@ import {
   ConfigurationRuleDefaults
 } from '@mercurjs/configuration'
 import { SELLER_MODULE } from '@mercurjs/seller'
-import { TENANT_MODULE } from '@mercurjs/tenant'
+import { TENANT_MODULE, TenantModuleService } from '@mercurjs/tenant'
 
 import sellerShippingProfile from '../../links/seller-shipping-profile'
 import { createCommissionRuleWorkflow } from '../../workflows/commission/workflows'
@@ -89,11 +89,14 @@ export async function createStore(
 }
 
 export async function createTenant(container: MedusaContainer) {
-  const tenantService = container.resolve(TENANT_MODULE)
+  const tenantService =
+    container.resolve<TenantModuleService>(TENANT_MODULE)
+
   const [tenant] = await tenantService.listTenants()
   if (tenant) {
     return tenant
   }
+
   const [created] = await tenantService.createTenants([
     { slug: 'default', settings: {} }
   ])
