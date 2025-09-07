@@ -27,7 +27,7 @@ export const ProductDetailsPage = async ({
         <div className="md:w-1/2 md:px-2">
           <ProductGallery images={prod?.images || []} />
         </div>
-        <div className="md:w-1/2 md:px-2 max-md:h-[calc(100vh-350px)] max-md:overflow-y-auto">
+        <div className="md:w-1/2 md:px-2">
           <ProductDetails product={prod} locale={locale} />
         </div>
       </div>
