@@ -57,8 +57,8 @@ export const Header = async () => {
               height={37}
               alt="Logo"
               priority
-              sizes="(max-width: 1024px) 110px, 135px"
-              className="w-[110px] h-[30px] lg:w-[135px] lg:h-[37px]"
+              sizes="135px"
+              className="w-[135px] h-[37px]"
             />
           </LocalizedClientLink>
         </div>
