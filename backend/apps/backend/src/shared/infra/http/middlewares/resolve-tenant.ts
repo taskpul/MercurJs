@@ -17,18 +17,23 @@ export async function resolveTenant(
 ) {
   const host = req.headers.host || ''
   const hostname = host.split(':')[0]
-  const [slug] = hostname.split('.')
 
-  if (!slug || slug === 'www' || slug === 'localhost') {
+  if (!hostname || hostname === 'localhost') {
     return next()
   }
 
   try {
     const tenantService = req.scope.resolve<TenantModuleService>(TENANT_MODULE)
-    let [tenant] = await tenantService.listTenants({ slug })
 
+    // Attempt to match the incoming hostname against a tenant's domain
+    let [tenant] = await tenantService.listTenants({ domain: hostname })
+
+    // Fallback to resolving by slug (first subdomain) when no domain match exists
     if (!tenant) {
-      ;[tenant] = await tenantService.listTenants({ domain: hostname })
+      const [slug] = hostname.split('.')
+      if (slug && slug !== 'www') {
+        ;[tenant] = await tenantService.listTenants({ slug })
+      }
     }
 
     if (tenant) {

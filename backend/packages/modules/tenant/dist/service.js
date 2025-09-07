@@ -5,6 +5,9 @@ const tenant_1 = require("./models/tenant");
 class TenantModuleService extends (0, utils_1.MedusaService)({
     Tenant: tenant_1.Tenant,
 }) {
+    async updateTenant(id, data) {
+        return await this.updateTenants(Object.assign({ id }, data));
+    }
 }
 exports.default = TenantModuleService;
 //# sourceMappingURL=service.js.map
