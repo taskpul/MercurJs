@@ -1,5 +1,5 @@
 import { withTenantScope } from "@mercurjs/framework"
-import { ProductModuleService as MedusaProductModuleService } from "@medusajs/product"
+import MedusaProductModuleService from "@medusajs/product/dist/services/product-module-service"
 
 const ProductModuleService = withTenantScope(MedusaProductModuleService)
 export default ProductModuleService
