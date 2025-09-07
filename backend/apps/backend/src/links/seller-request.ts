@@ -4,6 +4,6 @@ import RequestsModule from '@mercurjs/requests'
 import SellerModule from '@mercurjs/seller'
 
 export default defineLink(SellerModule.linkable.seller, {
-  linkable: RequestsModule.linkable.request,
+  linkable: (RequestsModule as any).linkable.request,
   isList: true
 })

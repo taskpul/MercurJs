@@ -4,6 +4,6 @@ import ProductModule from '@medusajs/medusa/product'
 import ReviewModule from '@mercurjs/reviews'
 
 export default defineLink(ProductModule.linkable.product, {
-  linkable: ReviewModule.linkable.review,
+  linkable: (ReviewModule as any).linkable.review,
   isList: true
 })

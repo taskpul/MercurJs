@@ -5,8 +5,8 @@ import BrandModule from '@mercurjs/brand'
 
 export default defineLink(
   {
-    linkable: ProductModule.linkable.product,
+    linkable: (ProductModule.linkable as any).product,
     isList: true
   },
-  BrandModule.linkable.brand
+  (BrandModule as any).linkable.brand
 )

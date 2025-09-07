@@ -4,6 +4,7 @@ import OrderModule from '@medusajs/medusa/order'
 import ReviewModule from '@mercurjs/reviews'
 
 export default defineLink(OrderModule.linkable.order, {
-  linkable: ReviewModule.linkable.review,
+  // Cast to any for untyped linkable
+  linkable: (ReviewModule as any).linkable.review,
   isList: true
 })
